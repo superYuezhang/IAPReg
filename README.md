@@ -8,3 +8,19 @@ We will update the code soon.
 <div style="text-align: center">
 <img src="fig/IAPReg.png" width="800"/>
 </div>
+
+## Citation
+
+If you find the paper useful, please consider citing:
+
+```
+@inproceedings{zhang2025partial,
+  title={Partial Point Cloud Registration with Multi-view 2D Image Learning},
+  author={Zhang, Yue and Wu, Yue and Ma, Wenping and Gong, Maoguo and Li, Hao and Hou, Biao},
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={39},
+  number={10},
+  pages={10329--10337},
+  year={2025}
+}
+```
