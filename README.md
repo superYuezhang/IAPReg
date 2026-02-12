@@ -24,6 +24,11 @@ If you find the paper useful, please consider citing:
   year={2025}
 }
 ```
-## Acknowledgement
+### Acknowledgments
+In this project we use (parts of) the official implementations of the followin works: 
 
-Our code refers to [REGTR](https://github.com/yewzijian/RegTR), [KPConv](https://github.com/HuguesTHOMAS/KPConv-PyTorch) and [PREDATOR](https://github.com/prs-eth/OverlapPredator). We want to thank the above open-source projects.
+- [PREDATOR](https://github.com/prs-eth/OverlapPredator) (Dataset)
+- [REGTR](https://github.com/yewzijian/RegTR) (Network)
+- [KPConv](https://github.com/HuguesTHOMAS/KPConv-PyTorch) (Backbone)
+
+ We thank the respective authors for open sourcing their methods. 
