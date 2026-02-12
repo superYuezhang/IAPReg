@@ -24,3 +24,6 @@ If you find the paper useful, please consider citing:
   year={2025}
 }
 ```
+## Acknowledgement
+
+Our code refers to [REGTR](https://github.com/yewzijian/RegTR), [KPConv](https://github.com/HuguesTHOMAS/KPConv-PyTorch) and [PREDATOR](https://github.com/prs-eth/OverlapPredator). We want to thank the above open-source projects.
