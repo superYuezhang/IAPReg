@@ -1,0 +1,89 @@
+
+dataset:
+    dataset: modelnet
+    root: /home/zy/dataset/modelnet40_ply_hdf5_2048
+    train_categoryfile: /home/zy/dataset/modelnet40_ply_hdf5_2048/modelnet40_half1.txt
+    val_categoryfile: /home/zy/dataset/modelnet40_ply_hdf5_2048/modelnet40_half1.txt
+    test_categoryfile: /home/zy/dataset/modelnet40_ply_hdf5_2048/modelnet40_half2.txt
+    augment_noise: 0.005
+    perturb_pose: small
+    batch_size: 4
+    overlap_radius: 0.0375  # Distance below which points will be considered to be overlapping
+    partial: [0.7, 0.7]  # Cropping ratio for training. Will be ignored during benchmarking
+    num_points: 1024
+    noise_type: crop
+    rot_mag: 45
+    trans_mag: 0.5
+
+train_options:
+    epochs: 200  # epochs
+
+solver:
+    optimizer: AdamW
+    lr: 0.0001
+    base_lr: 0.0001
+    weight_decay: 0.0001
+    scheduler_param: 0.5  # Decay by 0.5 every n epochs
+
+# Use a shallower backbone to maintain resolution
+kpconv_options:
+    num_layers: 2
+    neighborhood_limits: [50, 50]
+    aggregation_mode: sum
+    first_subsampling_dl: 0.03  # Set smaller to have a higher resolution
+    first_feats_dim: 512
+    fixed_kernel_points: center
+    in_feats_dim: 1
+    in_points_dim: 3
+    conv_radius: 2.75
+    deform_radius: 5.0
+    KP_extent: 2.0
+    KP_influence: linear
+    overlap_radius: 0.04
+    use_batch_norm: True
+    batch_norm_momentum: 0.02
+    modulated: False
+    num_kernel_points: 15
+    architecture: ['simple',
+                   'resnetb',
+                   'resnetb',
+                   'resnetb_strided',
+                   'resnetb',
+                   'resnetb',]
+
+
+model:
+    # Transformer
+    attention_type: dot_prod
+    nhead: 8
+    d_embed: 256
+    d_feedforward: 1024
+    dropout: 0.0  # dropout not compatible
+    pre_norm: True
+    transformer_act: relu
+
+    # Transformer encoder
+    num_encoder_layers: 4
+    transformer_encoder_has_pos_emb: True
+    sa_val_has_pos_emb: True
+    ca_val_has_pos_emb: True
+    pos_emb_type: sine  # either 'sine' or 'learned'
+
+    # Correspondence decoding
+    corr_decoder_has_pos_emb: True
+    direct_regress_coor: True # Whether to regress coordinates using MLP (True) or a final attention layer (False)
+
+
+losses:
+    r_p: 0.12
+    r_n: 0.24
+    w_loss: 0.3
+
+img:
+    vit_layers: 2
+
+validation:
+    # Registration success criteria. We use this to pick the best checkpoint
+    reg_success_thresh_rot: 5
+    reg_success_thresh_trans: 0.1
+    reg_success_thresh_rmse: 0.001
